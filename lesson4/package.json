@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "solc": "^0.8.7-fixed",
-    "web3": "^1.5.2"
-  },
-  "devDependencies": {
-    "hardhat": "^2.6.4"
-  }
-}
