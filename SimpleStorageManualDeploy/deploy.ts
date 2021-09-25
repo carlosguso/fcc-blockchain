@@ -91,14 +91,23 @@ const deploy = async () => {
 
     // Network endpoint
     const web3 = new Web3("http://localhost:8545");
-    // Chain ID
-    // const chainId = 5777;
-    // WARNING: This next to values should not be hardcoded, specially priv key. Use env variables.
+    // const web3 = new Web3(
+    //  "https://rinkeby.infura.io/v3/ed9a9329480b408e99c2d1c4d9049565"
+    // );
+    // Chain ID [Check chainid.network or use local one]
+    const chainId = 4;
+    // WARNING: This next to values should not be hardcoded, specially priv key. Use env variables. These are local node values.
     // Address to deploy from.
     const myAddress = "0x1C5B53F6712bd86b9934124dF51D30c5E4692075";
     // Address private key. Its hardcoded beacuase its a localchain. Dont do this with test/main net addresses.
     const myPrivateKey =
-      "51cf950073e94dd38a092de75ab4fc32b4876fe8bb51139269539c2b8a598c03";
+      "0x51cf950073e94dd38a092de75ab4fc32b4876fe8bb51139269539c2b8a598c03";
+
+    // Add wallet (Needed to interact with Infura node)
+    web3.eth.accounts.wallet.add({
+      privateKey: myPrivateKey,
+      address: myAddress,
+    });
 
     // Get last block number.
     // const latestBlockNumber = await web3.eth.getBlock();
@@ -161,8 +170,8 @@ const deploy = async () => {
     console.log("Est gas: ", storeTxGas);
 
     const storeTx = await liveContract.methods.store(15).send({
-      from: myAddress,
-      gas: storeTxGas,
+      from: web3.eth.accounts.wallet[0].address,
+      gas: Math.floor(storeTxGas * 1.5),
     });
     console.log(storeTx);
 
