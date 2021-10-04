@@ -3,7 +3,8 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-import hre from "hardhat";
+import { BigNumber } from "@ethersproject/bignumber";
+import hre, { ethers } from "hardhat";
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -14,7 +15,7 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const SimpleStorage = await hre.ethers.getContractFactory("SimpleStorage");
+  const SimpleStorage = await ethers.getContractFactory("SimpleStorage");
   const simpleStorage = await SimpleStorage.deploy();
 
   await simpleStorage.deployed();
@@ -26,6 +27,10 @@ async function main() {
   console.log(
     "First address of the network balance: ",
     await (await owner.getBalance()).toBigInt()
+  );
+  console.log(
+    "Stored value: ",
+    ((await simpleStorage.retrieve()) as BigNumber).toNumber()
   );
 }
 

@@ -2,6 +2,9 @@ import { task } from "hardhat/config";
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-ganache";
 
+const RINKEBY_URL = "";
+const RINKEBY_PRIVATE_KEY = "";
+
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
@@ -20,4 +23,12 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 export default {
   solidity: "0.6.12",
+  defaultNetwork: "hardhat",
+  networks: {
+    hardhat: {},
+    /* rinkeby: {
+      url: RINKEBY_URL,
+      accounts: [`0x${RINKEBY_PRIVATE_KEY}`],
+    }, */
+  },
 };
