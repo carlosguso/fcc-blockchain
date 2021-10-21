@@ -1,9 +1,11 @@
 import { task } from "hardhat/config";
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-ganache";
+// import "hardhat-dependency-compiler";
+import "@nomiclabs/hardhat-etherscan";
+import * as dotenv from "dotenv";
 
-const RINKEBY_URL = "";
-const RINKEBY_PRIVATE_KEY = "";
+dotenv.config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -26,9 +28,20 @@ export default {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
-    /* rinkeby: {
-      url: RINKEBY_URL,
-      accounts: [`0x${RINKEBY_PRIVATE_KEY}`],
-    }, */
+    rinkeby: {
+      url: `https://rinkeby.infura.io/v3/${process.env.RINKEBY_API_KEY}`,
+      accounts: [`0x${process.env.RINKEBY_PRIVATE_KEY}`],
+    },
   },
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: process.env.ETHERSCAN_API,
+  },
+  /* dependencyCompiler: {
+    paths: [
+      "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol",
+      "@chainlink/contracts/src/v0.6/vendor/SafeMathChainlink.sol",
+    ],
+  }, */
 };

@@ -98,10 +98,9 @@ const deploy = async () => {
     const chainId = 4;
     // WARNING: This next to values should not be hardcoded, specially priv key. Use env variables. These are local node values.
     // Address to deploy from.
-    const myAddress = "0x1C5B53F6712bd86b9934124dF51D30c5E4692075";
+    const myAddress = "0x<adress>";
     // Address private key. Its hardcoded beacuase its a localchain. Dont do this with test/main net addresses.
-    const myPrivateKey =
-      "0x51cf950073e94dd38a092de75ab4fc32b4876fe8bb51139269539c2b8a598c03";
+    const myPrivateKey = "0x<privateKey>";
 
     // Add wallet (Needed to interact with Infura node)
     web3.eth.accounts.wallet.add({
